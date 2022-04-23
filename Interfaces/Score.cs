@@ -38,7 +38,14 @@ public struct MatchScore
     public override bool Equals(object? obj)  => obj is MatchScore other && this.Equals(other);
     public bool Equals(MatchScore otherMatchScore) => teamOneScore==otherMatchScore.teamOneScore&&teamTwoScore==otherMatchScore.teamTwoScore
         || teamOneScore==otherMatchScore.teamTwoScore&&teamTwoScore==otherMatchScore.teamOneScore;
-    public override int GetHashCode() => (teamOneScore,teamTwoScore).GetHashCode();
+    public override int GetHashCode() 
+    {
+        var compareResult = teamOneScore.team.CompareTo(teamTwoScore.team);
+        if(compareResult>0)
+            return (teamOneScore, teamTwoScore).GetHashCode();
+        else
+            return (teamTwoScore, teamOneScore).GetHashCode();
+    }
     public static bool operator ==(MatchScore lhs, MatchScore rhs) => lhs.Equals(rhs);
     public static bool operator !=(MatchScore lhs, MatchScore rhs) => !(lhs == rhs);
 }
