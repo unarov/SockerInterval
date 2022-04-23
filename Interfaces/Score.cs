@@ -1,14 +1,35 @@
 ﻿namespace Interfaces;
-public struct Score
+public class TeamScore
 {
-    public Score(int ownerTeam, int guestTeam)
+    public Team team {get;}
+    public int score {get;}
+    public TeamScore(Team  team, int score)
     {
-        OwnerTeam = ownerTeam;
-        GuestTeam = guestTeam;
+        this.team = team;
+        this.score = score;
     }
 
-    public int OwnerTeam { get; }
-    public int GuestTeam { get; }
+}
+public class MatchScore
+{
 
-    public override string ToString() => $"({OwnerTeam}, {GuestTeam})";
+    TeamScore[] teamScore;
+    public MatchScore(Team teamOne, Team teamTwo, int scoreTeamOne, int scoreTeamTwo)
+    {
+        teamScore = new TeamScore[]{
+            new TeamScore(teamOne, scoreTeamOne),
+            new TeamScore(teamTwo, scoreTeamTwo)
+            };
+    }
+    public int GetTeamScore(Team team)
+    {
+        var targetTeamScore = teamScore.FirstOrDefault(x=>x.team==team);
+        if (targetTeamScore == null) 
+            throw new Exception($"The team {team} did not participate in the match");
+        return targetTeamScore.score;
+    }
+    public override string ToString()
+    {
+        return  $"({teamScore[0].score}, {teamScore[1].score})";
+    }
 }
