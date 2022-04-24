@@ -1,4 +1,5 @@
-using Interfaces;
+using Interfaces.Models;
+using Interfaces.Services;
 
 namespace StatisticService;
 public class Statistic : IStatistic

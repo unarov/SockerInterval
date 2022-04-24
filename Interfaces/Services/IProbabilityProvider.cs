@@ -1,4 +1,5 @@
-namespace Interfaces;
+using Interfaces.Models;
+namespace Interfaces.Services;
 public interface IProbabilityProvider
 {
     public double MatchScore((int,int)matchScore);

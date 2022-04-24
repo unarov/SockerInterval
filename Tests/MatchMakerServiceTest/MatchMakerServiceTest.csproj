@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MatchMakerService\MatchMakerService.csproj" />
+    <ProjectReference Include="..\..\StatisticService\StatisticService.csproj" />
   </ItemGroup>
 
 </Project>

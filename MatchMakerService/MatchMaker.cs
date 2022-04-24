@@ -1,15 +1,19 @@
 ﻿namespace MatchMakerService;
-public class MatchMaker
+using Interfaces.Services;
+public class MatchMaker : IMatchMaker
 {
-    Random random;
+    private Random _random;
+    private IStatistic _matchStat;
     int MATCH_TIME = 90;
-    public MatchMaker()
+    public MatchMaker(IStatistic matchStat)
     {
-        random = new Random();
+        _random = new Random();
+        _matchStat = matchStat;
     }
-    public MatchMaker(int seed)
+    public MatchMaker(IStatistic matchStat, int seed)
     {
-        random = new Random(seed);
+        _random = new Random(seed);
+        _matchStat = matchStat;
     }
     public (int,int) GenerateScore()
     {
@@ -20,11 +24,11 @@ public class MatchMaker
         double matchProportion = time * 1.0 / MATCH_TIME;
         var score = (0,0);
         for (int i=0; i< finalScore.Item1; i++){
-            var goalTime = random.NextDouble();
+            var goalTime = _random.NextDouble();
             if (goalTime<matchProportion) score.Item1++;
         }
         for (int i=0; i< finalScore.Item2; i++){
-            var goalTime = random.NextDouble();
+            var goalTime = _random.NextDouble();
             if (goalTime<matchProportion) score.Item2++;
         }
         return score;

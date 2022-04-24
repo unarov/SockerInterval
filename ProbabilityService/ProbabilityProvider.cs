@@ -1,6 +1,7 @@
 namespace ProbabilityService;
 
-using Interfaces;
+using Interfaces.Services;
+using Interfaces.Models;
 
 public class ProbabilityProvider : IProbabilityProvider
 {

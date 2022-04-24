@@ -15,7 +15,8 @@ public class GenerateScoreAtTimeTest
     [SetUp]
     public void Setup()
     {
-        _matchMaker = new MatchMaker(SEED);
+        var statistic = StatisticService.Statistic.GetMatchStat();
+        _matchMaker = new MatchMaker(statistic, SEED);
     }
 
     [TestCase(3, 2, 70)]
