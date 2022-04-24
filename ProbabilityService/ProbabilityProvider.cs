@@ -16,7 +16,12 @@ public class ProbabilityProvider : IProbabilityProvider
     }
     public double MatchScoreIfCurrentMatchScore((int,int) matchScore, (int,int) currentMatchScore, int time)
     {
-        throw new NotImplementedException();
+        var posibleScores = matchStat.GetPosibleOutcomes();
+
+        var currentMatchScoreFull = posibleScores.Sum(posibleScore=>{
+            return matchStat.ScorePercentage(posibleScore) * CurrentMatchScoreIfFinalScore(currentMatchScore, time, posibleScore);
+        });
+        return CurrentMatchScoreIfFinalScore(currentMatchScore, time, matchScore) * matchStat.ScorePercentage(matchScore) / currentMatchScoreFull;
     }
     public double CurrentMatchScoreIfFinalScore((int,int) currentMatchScore, int time, (int,int) matchScore)
     {
