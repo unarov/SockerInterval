@@ -31,5 +31,9 @@ public class GenerateScoreAtTimeTest
         var actualMean1 = scores.Average(x=>x.Item1);
         var expectedMean1 = finalScore.Item1 * time * 1.0 / MATCH_TIME;
         Assert.IsTrue(Math.Abs(actualMean1-expectedMean1)<delta);
+        
+        var actualMean2 = scores.Average(x=>x.Item2);
+        var expectedMean2 = finalScore.Item2 * time * 1.0 / MATCH_TIME;
+        Assert.IsTrue(Math.Abs(actualMean2-expectedMean2)<delta);
     }
 }
