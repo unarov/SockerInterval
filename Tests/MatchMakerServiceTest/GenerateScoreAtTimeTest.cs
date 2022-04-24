@@ -36,4 +36,13 @@ public class GenerateScoreAtTimeTest
         var expectedMean2 = finalScore.Item2 * time * 1.0 / MATCH_TIME;
         Assert.IsTrue(Math.Abs(actualMean2-expectedMean2)<delta);
     }
+
+    [TestCase(88)]
+    [TestCase(30)]
+    [TestCase(12)]
+    public void Test2(int time)
+    {
+        var finalScore = _matchMaker.GenerateScore();
+        Test(finalScore.Item1, finalScore.Item2, time);
+    }
 }
