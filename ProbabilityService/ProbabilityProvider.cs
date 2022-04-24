@@ -5,10 +5,10 @@ using Interfaces;
 public class ProbabilityProvider : IProbabilityProvider
 {
     private static int MATCH_TIME = 90;
-    private MatchStat matchStat;
-    public ProbabilityProvider()
+    private IStatistic matchStat;
+    public ProbabilityProvider(IStatistic matchStatistic)
     {
-        this.matchStat = MatchStat.GetMatchStat();
+        this.matchStat = matchStatistic;
     }
     public double MatchScore((int,int) matchScore)
     {

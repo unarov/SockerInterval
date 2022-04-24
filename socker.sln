@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbabilityServiceTest", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchMakerServiceTest", "Tests\MatchMakerServiceTest\MatchMakerServiceTest.csproj", "{5E8E38C8-6488-42A3-80D4-07395D244AF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticService", "StatisticService\StatisticService.csproj", "{636B55B8-D32B-4852-8920-E62A4F69AD59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{5E8E38C8-6488-42A3-80D4-07395D244AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E8E38C8-6488-42A3-80D4-07395D244AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E8E38C8-6488-42A3-80D4-07395D244AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{636B55B8-D32B-4852-8920-E62A4F69AD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{636B55B8-D32B-4852-8920-E62A4F69AD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636B55B8-D32B-4852-8920-E62A4F69AD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{636B55B8-D32B-4852-8920-E62A4F69AD59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EA6BF9BB-DE76-496A-B046-753481DA9DB0} = {D66F8485-AA13-4C90-8C06-C5BF2DB264E0}

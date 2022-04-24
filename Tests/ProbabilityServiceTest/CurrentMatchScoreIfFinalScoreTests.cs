@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using ProbabilityService;
+using StatisticService;
 
 namespace ProbabilityServiceTest;
 [TestFixture]
@@ -9,7 +10,8 @@ public class CurrentMatchScoreIfFinalScoreTests
     [SetUp]
     public void Setup()
     {
-        _probabilityProvider = new ProbabilityProvider();
+        var statistic = Statistic.GetMatchStat();
+        _probabilityProvider = new ProbabilityProvider(statistic);
     }
 
     [Test]

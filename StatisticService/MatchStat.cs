@@ -1,10 +1,10 @@
 using Interfaces;
 
-namespace ProbabilityService;
-public class MatchStat
+namespace StatisticService;
+public class Statistic : IStatistic
 {
     Dictionary<(int,int),int> statistic;
-    public MatchStat()
+    public Statistic()
     {
         statistic = new Dictionary<(int,int), int>();
     }
@@ -41,9 +41,9 @@ public class MatchStat
     {
         return statistic.Keys;
     }
-    public static MatchStat GetMatchStat()
+    public static Statistic GetMatchStat()
     {
-        MatchStat matchStat = new MatchStat();
+        Statistic matchStat = new Statistic();
 
         matchStat.Add((0,0), 433);
         matchStat.Add((0,1), 605);
