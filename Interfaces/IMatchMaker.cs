@@ -1,5 +1,5 @@
 namespace Interfaces;
 public interface IMatchMaker
 {
-    public MatchScore GetMatchScore();
+    public (int,int) GetMatchScore();
 }
