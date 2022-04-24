@@ -6,23 +6,27 @@ using Interfaces.Models;
 public class ProbabilityProvider : IProbabilityProvider
 {
     private static int MATCH_TIME = 90;
-    private IStatistic matchStat;
+    private IStatistic _statistic;
     public ProbabilityProvider(IStatistic matchStatistic)
     {
-        this.matchStat = matchStatistic;
+        this._statistic = matchStatistic;
     }
     public double MatchScore((int,int) matchScore)
     {
-        return matchStat.ScorePercentage(matchScore);
+        return _statistic.ScorePercentage(matchScore);
     }
     public double MatchScoreIfCurrentMatchScore((int,int) matchScore, (int,int) currentMatchScore, int time)
     {
-        var posibleScores = matchStat.GetPosibleOutcomes();
+        var posibleScores = _statistic.GetPosibleOutcomes();
+
+        //TODO Rare matches support
+        if (!posibleScores.Contains(currentMatchScore))
+            throw new Exception("Wow this is realy rare match!");
 
         var currentMatchScoreFull = posibleScores.Sum(posibleScore=>{
-            return matchStat.ScorePercentage(posibleScore) * CurrentMatchScoreIfFinalScore(currentMatchScore, time, posibleScore);
+            return _statistic.ScorePercentage(posibleScore) * CurrentMatchScoreIfFinalScore(currentMatchScore, time, posibleScore);
         });
-        return CurrentMatchScoreIfFinalScore(currentMatchScore, time, matchScore) * matchStat.ScorePercentage(matchScore) / currentMatchScoreFull;
+        return CurrentMatchScoreIfFinalScore(currentMatchScore, time, matchScore) * _statistic.ScorePercentage(matchScore) / currentMatchScoreFull;
     }
     public double CurrentMatchScoreIfFinalScore((int,int) currentMatchScore, int time, (int,int) matchScore)
     {
@@ -38,11 +42,11 @@ public class ProbabilityProvider : IProbabilityProvider
 
         return teamOneProbability*teamTwoProbability;
     }
-
     public double TeamScore(Team team, int score)
     {
-        return matchStat.TeamScorePercentage(team, score);
+        return _statistic.TeamScorePercentage(team, score);
     }
+    
     private double BernoulliTrial(double p, int positive, int total)
     {
         var combinations = Combinations(total, positive);
@@ -55,13 +59,11 @@ public class ProbabilityProvider : IProbabilityProvider
         // naive: return Factorial(n) / (Factorial(r) * Factorial(n - r));
         return Permutations(n, r) / Factorial(r);
     }
-
     private static long Permutations(int n, int r)
     {
         // naive: return Factorial(n) / Factorial(n - r);
         return FactorialDivision(n, n - r);
     }
-
     private static long FactorialDivision(int topFactorial, int divisorFactorial)
     {
         long result = 1;
@@ -69,7 +71,6 @@ public class ProbabilityProvider : IProbabilityProvider
             result *= i;
         return result;
     }
-
     private static long Factorial(int i)
     {
         if (i <= 1)

@@ -5,15 +5,15 @@ public class MatchMaker : IMatchMaker
     private Random _random;
     private IStatistic _matchStat;
     int MATCH_TIME = 90;
-    public MatchMaker(IStatistic matchStat)
+    public MatchMaker(IStatistic statistic)
     {
         _random = new Random();
-        _matchStat = matchStat;
+        _matchStat = statistic;
     }
-    public MatchMaker(IStatistic matchStat, int seed)
+    public MatchMaker(IStatistic statistic, int seed)
     {
         _random = new Random(seed);
-        _matchStat = matchStat;
+        _matchStat = statistic;
     }
     public (int,int) GenerateScore()
     {

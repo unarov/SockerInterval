@@ -10,8 +10,7 @@ var serviceProvider = new ServiceCollection()
     .AddScoped<IProbabilityProvider,ProbabilityProvider>()
     .BuildServiceProvider();
 
-var matchMakerService = serviceProvider.GetService<IMatchMaker>();
-for (int i=0; i<100; i++){
-    var score = matchMakerService.GenerateScoreAtTime(1,(1,2));
-    System.Console.WriteLine(score);
-}
+var probabilityProvider = serviceProvider.GetRequiredService<IProbabilityProvider>();
+var foo =probabilityProvider.MatchScoreIfCurrentMatchScore((2,2),(1,1),40);
+System.Console.WriteLine(foo);
+
