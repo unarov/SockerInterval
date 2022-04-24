@@ -17,7 +17,18 @@ public class MatchMaker : IMatchMaker
     }
     public (int,int) GenerateScore()
     {
-        throw new NotImplementedException();
+        var matchesCountDict = _matchStat.GetMatchesCount();
+        var totalMatches = matchesCountDict.Sum(x=>x.Value);
+        
+        int generatedMatchScoreIndex = _random.Next(0,totalMatches);
+        int index = 0;
+        foreach (var matchStat in matchesCountDict){
+            if (matchStat.Value + index > generatedMatchScoreIndex){
+                return matchStat.Key;
+            }
+            index += matchStat.Value;
+        }
+        throw new Exception("Generator ERROR");
     }
     public (int, int) GenerateScoreAtTime(int time, (int,int) finalScore)
     {

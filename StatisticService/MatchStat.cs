@@ -4,24 +4,24 @@ using Interfaces.Services;
 namespace StatisticService;
 public class Statistic : IStatistic
 {
-    Dictionary<(int,int),int> statistic;
+    private Dictionary<(int,int),int> _statistic;
     public Statistic()
     {
-        statistic = new Dictionary<(int,int), int>();
+        _statistic = new Dictionary<(int,int), int>();
     }
     public void Add((int,int) score, int count)
     {
-        if (statistic.ContainsKey(score)){
-            statistic[score]+=count;
+        if (_statistic.ContainsKey(score)){
+            _statistic[score]+=count;
         }
         else{
-            statistic[score]=count;
+            _statistic[score]=count;
         }
     }
     public double ScorePercentage((int,int) matchScore)
     {
-        int totalMatches = statistic.Sum(x=>x.Value);
-        return statistic[matchScore] * 1.0 / totalMatches;
+        int totalMatches = _statistic.Sum(x=>x.Value);
+        return _statistic[matchScore] * 1.0 / totalMatches;
     }
 
     public double TeamScorePercentage(Team team, int score)
@@ -29,18 +29,22 @@ public class Statistic : IStatistic
         if (team != Team.HomeTeam &&  team != Team.GuestTeam)
             throw new Exception("Unknown Team");
 
-        var totalMatches = statistic.Sum(x=>x.Value);
+        var totalMatches = _statistic.Sum(x=>x.Value);
         int targetMatches;
         if (team==Team.HomeTeam)
-            targetMatches = statistic.Where(x=>x.Key.Item1==score).Sum(x=>x.Value);
+            targetMatches = _statistic.Where(x=>x.Key.Item1==score).Sum(x=>x.Value);
         else
-            targetMatches = statistic.Where(x=>x.Key.Item2==score).Sum(x=>x.Value);
+            targetMatches = _statistic.Where(x=>x.Key.Item2==score).Sum(x=>x.Value);
         return targetMatches * 1.0 / totalMatches;
     }
 
     public IEnumerable<(int,int)> GetPosibleOutcomes()
     {
-        return statistic.Keys;
+        return _statistic.Keys;
+    }    
+    public Dictionary<(int, int), int> GetMatchesCount()
+    {
+        return _statistic;
     }
     public static Statistic GetMatchStat()
     {
@@ -91,4 +95,5 @@ public class Statistic : IStatistic
 
         return statistic;
     }
+
 }

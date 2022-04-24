@@ -10,7 +10,6 @@ var serviceProvider = new ServiceCollection()
     .AddScoped<IProbabilityProvider,ProbabilityProvider>()
     .BuildServiceProvider();
 
-var probabilityProvider = serviceProvider.GetRequiredService<IProbabilityProvider>();
-var foo =probabilityProvider.MatchScoreIfCurrentMatchScore((2,2),(1,1),40);
-System.Console.WriteLine(foo);
+var tastService = serviceProvider.GetRequiredService<IMatchMaker>();
+System.Console.WriteLine(tastService.GenerateScore());
 
