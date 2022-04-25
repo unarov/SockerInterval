@@ -20,6 +20,8 @@ public class Statistic : IStatistic
     }
     public double ScorePercentage((int,int) matchScore)
     {
+        if (!_statistic.Keys.Contains(matchScore))
+            return 0;
         int totalMatches = _statistic.Sum(x=>x.Value);
         return _statistic[matchScore] * 1.0 / totalMatches;
     }
