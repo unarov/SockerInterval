@@ -34,13 +34,17 @@ public class MatchMaker : IMatchMaker
         }
         throw new Exception("Generator ERROR");
     }
-    public List<Team> GenerateGoalSequence()
+    public List<Goal> GenerateGoalSequence()
     {
         var score = GenerateScore();
-        List<Team> goalSequence = new List<Team>();
-        goalSequence.AddRange(Enumerable.Repeat(Team.HomeTeam,score.Item1));
-        goalSequence.AddRange(Enumerable.Repeat(Team.GuestTeam,score.Item2));
-        goalSequence.OrderBy((item) => _random.Next());
+        List<Goal> goalSequence = new List<Goal>();
+        for (int i=0; i<score.Item1; i++)
+            goalSequence.Add(new Goal(){team=Team.HomeTeam,time=_random.Next(1,91)});
+        for (int i=0; i<score.Item2; i++)
+            goalSequence.Add(new Goal(){team=Team.GuestTeam,time=_random.Next(1,91)});
+
+        goalSequence = goalSequence.OrderBy(x=>x.time).ToList();
+
         return goalSequence;
     }
     public (int, int) GenerateScoreAtTime(int time, (int,int) finalScore)
