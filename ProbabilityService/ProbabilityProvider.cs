@@ -15,7 +15,7 @@ public class ProbabilityProvider : IProbabilityProvider
     {
         return _statistic.ScorePercentage(matchScore);
     }
-    public double MatchScoreIfCurrentMatchScore((int,int) matchScore, (int,int) currentMatchScore, int time)
+    public double MatchScore((int,int) matchScore, (int,int) currentMatchScore, int time)
     {
         var posibleScores = _statistic.GetPosibleOutcomes();
 

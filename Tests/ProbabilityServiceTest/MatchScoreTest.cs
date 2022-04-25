@@ -4,7 +4,7 @@ using StatisticService;
 
 namespace ProbabilityServiceTest;
 [TestFixture]
-public class CurrentMatchScoreIfFinalScoreTests
+public class MatchScoreTest
 {
     private ProbabilityProvider _probabilityProvider;
     [SetUp]
@@ -15,7 +15,7 @@ public class CurrentMatchScoreIfFinalScoreTests
     }
 
     [Test]
-    public void CurrentMatchScoreIfFinalScoreTest()
+    public void Test()
     {
         
         Assert.Pass();
