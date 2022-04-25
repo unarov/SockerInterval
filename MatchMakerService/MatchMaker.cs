@@ -1,5 +1,9 @@
 ﻿namespace MatchMakerService;
+
+using System.Collections.Generic;
+using Interfaces.Models;
 using Interfaces.Services;
+using System.Linq;
 public class MatchMaker : IMatchMaker
 {
     private Random _random;
@@ -29,6 +33,15 @@ public class MatchMaker : IMatchMaker
             index += matchStat.Value;
         }
         throw new Exception("Generator ERROR");
+    }
+    public List<Team> GenerateGoalSequence()
+    {
+        var score = GenerateScore();
+        List<Team> goalSequence = new List<Team>();
+        goalSequence.AddRange(Enumerable.Repeat(Team.HomeTeam,score.Item1));
+        goalSequence.AddRange(Enumerable.Repeat(Team.GuestTeam,score.Item2));
+        goalSequence.OrderBy((item) => _random.Next());
+        return goalSequence;
     }
     public (int, int) GenerateScoreAtTime(int time, (int,int) finalScore)
     {
