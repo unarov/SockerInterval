@@ -5,6 +5,7 @@
     <ProjectReference Include="..\MatchMakerService\MatchMakerService.csproj" />
     <ProjectReference Include="..\ProbabilityService\ProbabilityService.csproj" />
     <ProjectReference Include="..\StatisticService\StatisticService.csproj" />
+    <ProjectReference Include="..\IntervalService\IntervalService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
