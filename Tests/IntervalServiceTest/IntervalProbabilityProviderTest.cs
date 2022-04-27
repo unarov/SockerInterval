@@ -56,7 +56,6 @@ public class IntervalProbabilityProviderTest
         System.Console.WriteLine(expectedTie);
         System.Console.WriteLine(expectedNotClosed);
         
-
         var actualInterval = _intervalProbabilityProvider.GetIntervalProbability(timeLeft, goalSequance, intervalStart, intervalEnd);
 
         System.Console.WriteLine("actual");
@@ -65,10 +64,16 @@ public class IntervalProbabilityProviderTest
         System.Console.WriteLine(actualInterval[IntervalResult.Tie]);
         System.Console.WriteLine(actualInterval[IntervalResult.NotClosed]);
 
+        var probSum = actualInterval[IntervalResult.HomeWin]
+            + actualInterval[IntervalResult.GuestWin]
+            + actualInterval[IntervalResult.Tie]
+            + actualInterval[IntervalResult.NotClosed];
+
         Assert.IsTrue(Math.Abs(expectedHomeWin-actualInterval[IntervalResult.HomeWin])<delta, "Expected HomeWin not reached");
         Assert.IsTrue(Math.Abs(expectedGuestWin-actualInterval[IntervalResult.GuestWin])<delta, "Expected GuestWin not reached");
         Assert.IsTrue(Math.Abs(expectedTie-actualInterval[IntervalResult.Tie])<delta, "Expected Tie not reached");
         Assert.IsTrue(Math.Abs(expectedNotClosed-actualInterval[IntervalResult.NotClosed])<delta, "Expected NotClosed not reached");
+        Assert.IsTrue(Math.Abs(probSum - 1) < delta, "Probability sum should be 1");
     }
 
     private bool ValidGoalSequance(List<Goal> generatedGoalSequance, List<Team> goalSequance, int time)
