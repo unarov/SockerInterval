@@ -2,6 +2,7 @@ namespace ProbabilityService;
 
 using Interfaces.Services;
 using Interfaces.Models;
+using System.Collections.Generic;
 
 public class ProbabilityProvider : IProbabilityProvider
 {
@@ -17,7 +18,10 @@ public class ProbabilityProvider : IProbabilityProvider
     }
     public double MatchScore((int,int) matchScore, (int,int) currentMatchScore, int time)
     {
-        var posibleScores = _statistic.GetPosibleOutcomes();
+        if (time==MATCH_TIME){
+            return matchScore==currentMatchScore? 1:0;
+        }
+        var posibleScores = GetPossibleScores();
 
         //TODO Rare matches support
         if (!posibleScores.Contains(currentMatchScore))
@@ -32,7 +36,7 @@ public class ProbabilityProvider : IProbabilityProvider
     {
         if (time<0 || time>MATCH_TIME)
             throw new  Exception($"Time should be between 0 and {MATCH_TIME}");
-        var timeProportion = time * 1.0 / MATCH_TIME;
+        var timeProportion = (time + 1) * 1.0 / (MATCH_TIME);
 
         if (currentMatchScore.Item1>matchScore.Item1 || currentMatchScore.Item2>matchScore.Item2)
             return 0;
@@ -46,7 +50,10 @@ public class ProbabilityProvider : IProbabilityProvider
     {
         return _statistic.TeamScorePercentage(team, score);
     }
-    
+    public IEnumerable<(int, int)> GetPossibleScores()
+    {
+        return _statistic.GetOutcomes();
+    }
     private double BernoulliTrial(double p, int positive, int total)
     {
         var combinations = Combinations(total, positive);
@@ -77,4 +84,5 @@ public class ProbabilityProvider : IProbabilityProvider
             return 1;
         return i * Factorial(i - 1);
     }
+
 }

@@ -40,7 +40,7 @@ public class Statistic : IStatistic
         return targetMatches * 1.0 / totalMatches;
     }
 
-    public IEnumerable<(int,int)> GetPosibleOutcomes()
+    public IEnumerable<(int,int)> GetOutcomes()
     {
         return _statistic.Keys;
     }    

@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\IntervalService\IntervalService.csproj" />
     <ProjectReference Include="..\..\MatchMakerService\MatchMakerService.csproj" />
     <ProjectReference Include="..\..\StatisticService\StatisticService.csproj" />
+    <ProjectReference Include="..\..\ProbabilityService\ProbabilityService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -44,6 +44,8 @@ public class MatchScoreTest
     [TestCase(0, 0, 1, 4, 60)]
     [TestCase(5, 1, 3, 1, 75)]
     [TestCase(5, 11, 2, 4, 20)]
+    [TestCase(2, 2, 2, 2, 90)]
+    [TestCase(2, 2, 2, 3, 90)]
     public void Test(int teamOneScore, int teamTwoScore, int teamOneScoreAtTime, int teamTwoScoreAtTime, int time)
     {
         List<List<Goal>> scoreList = new List<List<Goal>>();
